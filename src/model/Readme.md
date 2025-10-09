@@ -1,1 +1,2 @@
-# Модель для обнаружения этикеток доступна для скачивания [здесь]([https://drive.google.com/file/d/your-file-id/view?usp=sharing](https://drive.google.com/drive/folders/1krBXMVql8i6iG1usUbNdDRefAG4jx9z-)).
+# Модели 
+* Модель model_train_label для обнаружения этикеток доступна для скачивания [здесь]([https://drive.google.com/file/d/your-file-id/view?usp=sharing](https://drive.google.com/drive/folders/1krBXMVql8i6iG1usUbNdDRefAG4jx9z-)).
