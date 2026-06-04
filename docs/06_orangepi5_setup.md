@@ -2,6 +2,18 @@
 
 Эта инструкция описывает базовую подготовку Orange Pi 5 для запуска RKNN-пайплайна.
 
+## Внешняя документация
+
+Официальные и полезные источники:
+
+- Страница Orange Pi 5: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html
+- Orange Pi Wiki: http://www.orangepi.org/orangepiwiki/
+- Образы Orange Pi: http://www.orangepi.org/html/serviceAndSupport/index.html
+- RKNN Toolkit2: https://github.com/airockchip/rknn-toolkit2
+- RKNN Model Zoo: https://github.com/airockchip/rknn_model_zoo
+
+Если ссылки изменятся, ищите на сайте Orange Pi разделы `Download`, `User Manual`, `Images` и `Orange Pi 5`.
+
 ## Железо
 
 Рекомендуемый набор:
@@ -11,6 +23,42 @@
 - microSD/eMMC с Linux;
 - USB-камера или камера, доступная как `/dev/video*`;
 - USB-накопитель для записи видео, если используется сборщик.
+
+## Установка операционной системы
+
+Общий порядок установки ОС на Orange Pi 5:
+
+1. Скачайте образ ОС для Orange Pi 5 с официальной страницы Orange Pi.
+2. Скачайте руководство пользователя `User Manual` для Orange Pi 5.
+3. Распакуйте образ, если он скачан как `.xz`, `.zip` или `.7z`.
+4. Запишите образ на microSD/eMMC.
+5. Вставьте носитель в Orange Pi 5 и включите питание.
+6. Выполните первичную настройку сети, пользователя и SSH.
+
+Для записи образа удобно использовать:
+
+- balenaEtcher: https://etcher.balena.io/
+- Raspberry Pi Imager: https://www.raspberrypi.com/software/
+- `dd` на Linux.
+
+Пример записи через `dd` на Linux:
+
+```bash
+lsblk
+sudo umount /dev/sdX*
+sudo dd if=orange_pi_5_image.img of=/dev/sdX bs=4M status=progress conv=fsync
+sync
+```
+
+Важно: замените `/dev/sdX` на ваш носитель. Ошибка в имени диска может стереть данные на компьютере.
+
+После первого запуска проверьте доступ по SSH:
+
+```bash
+ssh orangepi@IP_ADDRESS
+```
+
+Логин и пароль по умолчанию зависят от конкретного образа. Смотрите их в официальном manual к скачанному образу.
 
 ## Базовая проверка системы
 
@@ -31,6 +79,13 @@ sudo apt upgrade -y
 
 ```bash
 sudo apt install -y python3 python3-pip python3-venv git ffmpeg v4l-utils
+```
+
+Проверка Python:
+
+```bash
+python3 --version
+pip3 --version
 ```
 
 ## Python-окружение
@@ -55,6 +110,17 @@ pip install rknn_toolkit_lite2-*.whl
 ```bash
 python3 -c "from rknnlite.api import RKNNLite; print('RKNNLite OK')"
 ```
+
+Если установка не проходит, проверьте:
+
+- архитектуру платы: `uname -m`;
+- версию Python: `python3 --version`;
+- что wheel-файл подходит под вашу версию Python;
+- что это именно `rknn-lite2`, а не `rknn-toolkit2`.
+
+## Что не нужно ставить на Orange Pi
+
+На Orange Pi обычно не нужно ставить полный `rknn-toolkit2`, потому что плата запускает уже готовые `.rknn` модели. Конвертацию `.onnx -> .rknn` лучше делать на отдельном Linux x86_64 компьютере, а на Orange Pi переносить только результат.
 
 ## Куда положить модели
 

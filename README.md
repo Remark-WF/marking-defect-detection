@@ -128,3 +128,5 @@ py -3 -m pip install -r requirements-dev.txt
 - [Камера и захват изображения](docs/07_camera_capture.md)
 - [Запуск пайплайна](docs/08_run_pipeline.md)
 - [Передача проекта следующему разработчику](docs/09_handover_checklist.md)
+- [Внешняя документация](docs/10_external_references.md)
+- [Почему post-processing написан вручную](docs/11_manual_postprocessing.md)
