@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Training outputs
+runs/
+wandb/
+*.cache
+
+# Large assets. Store these in cloud storage, not in Git.
+*.pt
+*.onnx
+*.rknn
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.zip
+*.7z
+*.rar
+datasets/
+weights/
+videos/
+results/
+external_assets/
+
+# Local runtime output
+output/
+outputs/
+logs/
+*.csv
+!docs/**/*.csv
